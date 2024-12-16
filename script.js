@@ -17,7 +17,7 @@ window.addEventListener('keydown', () => {
 let playerX = canvas.width/2, playerY = canvas.height/2;
 let isGameOver = false;
 let startTime, currentTime;
-const highScore = localStorage.getItem('highScore') || 0;
+let highScore = localStorage.getItem('highScore') || 0;
 
 // 적 배열
 const enemies = [];
@@ -103,9 +103,9 @@ function updateHighScore(){
   if (elapsedTime > highScore) {
     highScore = elapsedTime; // 최고 기록 갱신
     localStorage.setItem('highScore', highScore); // 로컬 스토리지에 저장
-    alert(`New High Score: ${highScore} seconds!`);
+    alert(`New High Score: ${highScore} !!`);
   } else {
-    alert(`Game Over! Your time: ${elapsedTime} seconds. High Score: ${highScore} seconds.`);
+    alert(`Game Over! Your time: ${elapsedTime}. High Score: ${highScore}.`);
   }
 }
 // 게임 루프
