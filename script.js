@@ -78,10 +78,11 @@ function checkCollisions() {
       player.y < enemy.y + enemy.height &&
       player.y + player.height > enemy.y
     ) {
-      console.log('Collision detected!');
-      isGameOver = true; // 게임 종료
+      backgroundMusic.loop=false;
       backgroundMusic.pause();
       gameOverMusic.play();
+      console.log('Collision detected!');
+      isGameOver = true; // 게임 종료
     }
   });
 }
