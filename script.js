@@ -17,11 +17,12 @@ window.addEventListener('keydown', () => {
 let playerX = canvas.width/2, playerY = canvas.height/2;
 let isGameOver = false;
 let startTime, currentTime;
-let highScore = parseFloat(localStorage.getItem('highScore')) || 0;
-
+let highScore = localStorage.getItem('highScore') || 0;
+/*
 if(isNaN(highScore)){
   highScore=0;
 }
+*/
 // 적 배열
 const enemies = [];
 
@@ -104,8 +105,8 @@ function drawTime() {
 function updateHighScore(){
   const elapsedTime = ((currentTime - startTime) / 1000).toFixed(2); // 현재 생존 시간
   if (elapsedTime > highScore) {
-    highScore = parseFloat(elapsedTime); // 최고 기록 갱신
-    localStorage.setItem('highScore', highScore.toString()); // 로컬 스토리지에 저장
+    highScore = elapsedTime; // 최고 기록 갱신
+    localStorage.setItem('highScore', highScore); // 로컬 스토리지에 저장
     alert(`New High Score: ${highScore} !!`);
   } else {
     alert(`Game Over! Your time: ${elapsedTime}. High Score: ${highScore}.`);
