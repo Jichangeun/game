@@ -2,9 +2,17 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 const backgroundMusic = new Audio('background.mp3');
-
+const gameOverMusic = new Audio('gameover.mp3');
 backgroundMusic.loop = true;
-backgroundMusic.play();
+
+// 사용자 상호작용 이벤트로 배경음악 재생
+window.addEventListener('keydown', () => {
+  if (backgroundMusic.paused) {
+    backgroundMusic.play().catch(error => {
+      console.error('Audio playback failed:', error);
+    });
+  }
+});
 
 let playerX = canvas.width/2, playerY = canvas.height/2;
 let isGameOver = false;
@@ -72,6 +80,8 @@ function checkCollisions() {
     ) {
       console.log('Collision detected!');
       isGameOver = true; // 게임 종료
+      backgroundMusic.pause();
+      gameOverMusic.play();
     }
   });
 }
