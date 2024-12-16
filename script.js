@@ -1,6 +1,12 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
+const playerImg = new Image();
+playerImg.src='astronaut.png';
+
+const enemyImg = new Image();
+enemyImg.src='alien2.png';
+
 const backgroundMusic = new Audio('background.mp3');
 const gameOverMusic = new Audio('gameover.mp3');
 backgroundMusic.loop = true;
@@ -33,8 +39,8 @@ function initializeEnemies(count) {
     enemies.push({
       x: Math.random() * (canvas.width - 50), // 랜덤 X 위치
       y: Math.random() * (canvas.height - 50), // 랜덤 Y 위치
-      width: 50,
-      height: 50,
+      width: 55,
+      height: 35,
       speedX: Math.random() * 2 + 1, // X 방향 속도 (1~3)
       speedY: Math.random() * 2 + 1, // Y 방향 속도 (1~3)
     });
@@ -44,8 +50,7 @@ function initializeEnemies(count) {
 // 적 그리기
 function drawEnemies() {
   enemies.forEach(enemy => {
-    ctx.fillStyle = 'red';
-    ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+    ctx.drawImage(enemyImg,enemy.x, enemy.y, enemy.width, enemy.height);
   });
 }
 
@@ -67,8 +72,7 @@ function moveEnemies() {
 
 // 플레이어 그리기
 function drawPlayer() {
-  ctx.fillStyle = 'blue';
-  ctx.fillRect(playerX, playerY, 50, 50);
+  ctx.drawImage(playerImg, playerX, playerY, 60, 60);
 }
 
 // 충돌 감지
@@ -97,7 +101,7 @@ function drawTime() {
   }
   const elapsedTime = ((currentTime - startTime) / 1000).toFixed(2); // 경과 시간(초)
   ctx.font = '20px Arial';
-  ctx.fillStyle = 'black';
+  ctx.fillStyle = 'white';
   ctx.fillText(`Time: ${elapsedTime}`, 10, 40);
   ctx.fillText(`High Score: ${highScore}`, 10, 60);
 }
