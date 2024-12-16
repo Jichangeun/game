@@ -23,12 +23,11 @@ window.addEventListener('keydown', () => {
 let playerX = canvas.width/2, playerY = canvas.height/2;
 let isGameOver = false;
 let startTime, currentTime;
-let highScore = localStorage.getItem('highScore') || 0;
-/*
-if(isNaN(highScore)){
-  highScore=0;
+let highRecord = localStorage.getItem('highRecord') || 0;
+
+if(isNaN(highRecord)){
+  highRecord=0;
 }
-*/
 // 적 배열
 const enemies = [];
 
@@ -102,24 +101,24 @@ function drawTime() {
   const elapsedTime = ((currentTime - startTime) / 1000).toFixed(2); // 경과 시간(초)
   ctx.font = '20px Arial';
   ctx.fillStyle = 'white';
-  ctx.fillText(`Time: ${elapsedTime}`, 10, 40);
-  ctx.fillText(`High Score: ${highScore}`, 10, 60);
+  ctx.fillText(`Time: ${elapsedTime}s`, 10, 40);
+  ctx.fillText(`High Record: ${highRecord}s`, 10, 60);
 }
 
-function updateHighScore(){
+function updateHighRecord(){
   const elapsedTime = ((currentTime - startTime) / 1000).toFixed(2); // 현재 생존 시간
-  if (elapsedTime > highScore) {
-    highScore = elapsedTime; // 최고 기록 갱신
-    localStorage.setItem('highScore', highScore); // 로컬 스토리지에 저장
-    alert(`New High Score: ${highScore} !!`);
+  if (elapsedTime > highRecord) {
+    highRecord = elapsedTime; // 최고 기록 갱신
+    localStorage.setItem('highRecord', highRecord); // 로컬 스토리지에 저장
+    alert(`New High Record: ${highRecord}s !!`);
   } else {
-    alert(`Game Over! Your time: ${elapsedTime}. High Score: ${highScore}.`);
+    alert(`Game Over! Your time: ${elapsedTime}s. High Record: ${highRecord}s.`);
   }
 }
 // 게임 루프
 function gameLoop() {
   if (isGameOver) {
-    updateHighScore();
+    updateHighRecord();
     return; // 게임 루프 중단
   }
 
